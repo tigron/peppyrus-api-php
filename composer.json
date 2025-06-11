@@ -1,0 +1,29 @@
+{
+  "name": "tigron/peppyrus-api-php",
+  "description": "Peppyrus PHP API client",
+  "keywords": [
+    "Peppyrus",
+    "PEPPOL",
+    "UBL",
+    "PHP",
+  ],
+  "homepage": "https://www.peppyrus.be",
+  "authors": [
+    {
+      "name": "Tigron B.V.",
+      "email": "support@peppyrus.be"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "guzzlehttp/guzzle": "^7.6",    
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-openssl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Peppyrus\\Api\\": "lib/Peppyrus/Api/"
+    }
+  }
+}

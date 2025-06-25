@@ -21,8 +21,7 @@ class Client extends \GuzzleHttp\Client {
 	 */
 	public function __construct() {
 		parent::__construct([
-			'base_uri' => 'https://api.peppyrus.be/v1',
-//			'base_uri' => 'http://api.peppyrus.test4.tigron.be/v1',
+			'base_uri' => Config::$endpoint,
 			'headers' => [
 				'Content-Type' => 'application/json',
 				'X-Api-Key' => Config::$key,

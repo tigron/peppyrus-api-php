@@ -19,4 +19,12 @@ class Config {
 	 */
 	public static $key = '';
 
+	/**
+	 * API endpoint
+	 * 
+	 * @access public
+	 * @var string $endpoint	 
+	 */
+	public static $endpoint = 'https://api.peppyrus.be/v1',
+
 }

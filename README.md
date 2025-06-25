@@ -24,6 +24,11 @@ Make sure you set the API key:
 
     \Peppyrus\Api\Config::$key = 'YOUR_API_KEY';
 
+In case you want to use the test API, please change the Endpoint to:
+
+    \Peppyrus\Api\Config::$endpoint = 'https://api.test.peppyrus.be';
+
+
 ### Peppol search operations
 
 Lookup participant capabilities in SMP. This will return a list of document types that are supported by the participant.

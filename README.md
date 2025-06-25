@@ -37,16 +37,16 @@ Search a Participant in the [Peppol directory](https://directory.peppol.eu/publi
 
 The following parameters are available:
 
-	| parameter 	| Description					|
-	| ---------		| -----------					|
-	| query			| Generic query term			|
-	| participantId	| Searches for exact matches in the Peppol participant identifier field (the identifier scheme must be part of the value)|
-	| name			| Searches for partial matches in business entity names		|
-	| country		| Searches for exact matches in business entity country codes (ISO-2 code)	|
-	| geoInfo		| Searches for partial matches in the geographical information			|
-	| identifierScheme			| Searches for exact matches in the additional identifier schemes. Combine it with identifierValue for fine grained search results.		|
-	| identifierValue			| Searches for exact matches in the additional identifier values. Combine it with identifierScheme for fine grained search results.		|
-	| contact		| Searches for partial matches in the business entity contact information. It searches in all sub-fields of contact (type, name, phone number and email address).|
+| parameter 	| Description					|
+| ---------		| -----------					|
+| query			| Generic query term			|
+| participantId	| Searches for exact matches in the Peppol participant identifier field (the identifier scheme must be part of the value)|
+| name			| Searches for partial matches in business entity names		|
+| country		| Searches for exact matches in business entity country codes (ISO-2 code)	|
+| geoInfo		| Searches for partial matches in the geographical information			|
+| identifierScheme			| Searches for exact matches in the additional identifier schemes. Combine it with identifierValue for fine grained search results.		|
+| identifierValue			| Searches for exact matches in the additional identifier values. Combine it with identifierScheme for fine grained search results.		|
+| contact		| Searches for partial matches in the business entity contact information. It searches in all sub-fields of contact (type, name, phone number and email address).|
 
 
 

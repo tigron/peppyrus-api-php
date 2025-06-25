@@ -22,7 +22,7 @@ class Client extends \GuzzleHttp\Client {
 	public function __construct() {
 		parent::__construct([
 			'base_uri' => 'https://api.peppyrus.be/v1',
-			'base_uri' => 'http://api.peppyrus.test1.tigron.be/v1',
+//			'base_uri' => 'http://api.peppyrus.test4.tigron.be/v1',
 			'headers' => [
 				'Content-Type' => 'application/json',
 				'X-Api-Key' => Config::$key,
@@ -54,6 +54,7 @@ class Client extends \GuzzleHttp\Client {
 		}
 
 		if ($response->getStatusCode() === 500) {
+			print_r((string)$response->getBody());
 			throw new \Exception('Internal server error');
 		}
 

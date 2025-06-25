@@ -18,13 +18,18 @@ class Peppol {
 	 *
 	 * @access public
 	 * @param string $scheme
-	 * @param string $identifier
+	 * @param string $participantId
 	 * @return array $participant
 	 */
-	public static function lookup($scheme = 'iso6523-actorid-upis', $identifier): array {
+	public static function lookup($scheme = 'iso6523-actorid-upis', $participantId): array {
 		$client = new Client();
-		$response = $client->get('/v1/peppol/lookup?scheme=' . $scheme . '&identifier=' . $identifier);
+		$response = $client->get('/v1/peppol/lookup?scheme=' . $scheme . '&participantId=' . $participantId);
 		$json = (string)$response->getBody();
+
+		if ($response->getStatusCode() == 404) {
+			throw new \Exception('PEPPOL identifier not found');
+		}
+
 		return json_decode($json, true);
 	}
 
@@ -49,7 +54,7 @@ class Peppol {
 	 * @return array $participant
 	 */
 	public static function search($parameters): array {
-		$allowed = [ 
+		$allowed = [
 			'query',
 			'participantId',
 			'name',

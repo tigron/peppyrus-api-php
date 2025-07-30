@@ -8,7 +8,6 @@
 namespace Peppyrus\Api;
 
 class Config {
-
 	/**
 	 * Key
 	 *
@@ -25,6 +24,5 @@ class Config {
 	 * @access public
 	 * @var string $endpoint	 
 	 */
-	public static $endpoint = 'https://api.peppyrus.be/v1',
-
+	public static $endpoint = 'https://api.peppyrus.be/v1';
 }

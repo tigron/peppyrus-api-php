@@ -34,6 +34,26 @@ class Peppol {
 	}
 
 	/**
+	 * Find best matching participant_id in SMP
+	 *
+	 * @access public
+	 * @param string $scheme
+	 * @param string $country_code in format vat BE, NL, FR, ..
+	 * @return array $vat_number Without country code => 0123456789
+	 */
+	public static function best_match(string $country_code, string $vat_number): array {
+		$client = new Client();
+		$response = $client->get('/v1/peppol/bestMatch?countryCode=' . $country_code . '&vatNumber=' . $vat_number);
+		$json = (string)$response->getBody();
+
+		if ($response->getStatusCode() == 404) {
+			throw new \Exception('No best match found');
+		}
+
+		return json_decode($json, true);
+	}
+
+	/**
 	 * Search
 	 * Search for a participant in PEPPOL directory
 	 *

@@ -25,4 +25,12 @@ class Config {
 	 * @var string $endpoint	 
 	 */
 	public static $endpoint = 'https://api.peppyrus.be/v1';
+
+	/**
+	 * Configure a log file
+	 *
+	 * @access public
+	 * @var string $peppyrus_log_file
+	 */
+	public static $peppyrus_log_file = '';
 }

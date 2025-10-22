@@ -14,21 +14,45 @@ use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\RequestOptions;
 
 class Client extends \GuzzleHttp\Client {
+
+	/**
+	 * Logger
+	 *
+	 * @var \Monolog\Logger
+	 */
+	private \Monolog\Logger $logger;
+
 	/**
 	 * Constructor
 	 *
 	 * @access public
 	 */
 	public function __construct() {
-		parent::__construct([
-			'base_uri' => Config::$endpoint,
-			'headers' => [
-				'Content-Type' => 'application/json',
-				'X-Api-Key' => Config::$key,
-			],
-			'http_errors' => false,
-			'exception' => false,
-		]);
+		if (empty(Config::$peppyrus_log_file) === true) {
+			parent::__construct([
+				'base_uri' => Config::$endpoint,
+				'headers' => [
+					'Content-Type' => 'application/json',
+					'X-Api-Key' => Config::$key,
+				],
+				'http_errors' => false,
+				'exception' => false,
+			]);
+		} else {
+			parent::__construct([
+				'base_uri' => Config::$endpoint,
+				'headers' => [
+					'Content-Type' => 'application/json',
+					'X-Api-Key' => Config::$key,
+				],
+				'handler' => $this->create_logging_handler_stack([
+					'{method} {uri} HTTP/{version} {req_body} - {req_headers}',
+					"RESPONSE: {code} - {res_body}\n",
+				], ),
+				'http_errors' => false,
+				'exception' => false,
+			]);
+		}
 	}
 
     /**
@@ -58,6 +82,46 @@ class Client extends \GuzzleHttp\Client {
 		}
 
         return $response;
-    }	
+    }
+
+	/**
+	 * Create logging handler stack
+	 *
+	 * @access public
+	 * @param array $message_formats
+	 * @return HandlerStack $stack
+	 */
+	private function create_logging_handler_stack(array $message_formats) {
+		$stack = \GuzzleHttp\HandlerStack::create();
+		foreach ($message_formats as $message_format) {
+			$stack->unshift(
+				$this->get_logger($message_format)
+			);
+		}
+
+		return $stack;
+	}
+
+	/**
+	 * Get logger
+	 *
+	 * @access public
+	 * @param string $message_format
+	 * @return
+	 */
+	private function get_logger(string $message_format) {
+		if (empty($this->logger)) {
+			$this->logger = new \Monolog\Logger('tigron/peppyrus-api-php');
+			$formatter = new \Monolog\Formatter\LineFormatter(null, null, true, true);
+			$handler = new \Monolog\Handler\StreamHandler(Config::$peppyrus_log_file);
+			$handler->setFormatter($formatter);
+			$this->logger->pushHandler($handler);
+		}
+
+		return \GuzzleHttp\Middleware::log(
+			$this->logger,
+			new \GuzzleHttp\MessageFormatter($message_format)
+		);
+	}
 
 }

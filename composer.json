@@ -19,7 +19,8 @@
     "guzzlehttp/guzzle": "^7.6",    
     "ext-curl": "*",
     "ext-json": "*",
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+	"monolog/monolog": "1.*"
   },
   "autoload": {
     "psr-4": {

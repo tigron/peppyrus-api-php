@@ -20,7 +20,7 @@
     "ext-curl": "*",
     "ext-json": "*",
     "ext-openssl": "*",
-	"monolog/monolog": "1.*"
+	"monolog/monolog": ">1"
   },
   "autoload": {
     "psr-4": {

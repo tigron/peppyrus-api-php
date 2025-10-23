@@ -21,7 +21,7 @@ class Peppol {
 	 * @param string $participantId
 	 * @return array $participant
 	 */
-	public static function lookup($scheme = 'iso6523-actorid-upis', $participantId): array {
+	public static function lookup($scheme, $participantId): array {
 		$client = new Client();
 		$response = $client->get('/v1/peppol/lookup?scheme=' . $scheme . '&participantId=' . $participantId);
 		$json = (string)$response->getBody();

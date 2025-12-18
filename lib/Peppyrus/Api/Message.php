@@ -100,6 +100,10 @@ class Message {
 
 		$response = $client->post('/v1/message', $data);
 		$json = (string)$response->getBody();
+
+		if ($response->getStatusCode() == 422) {
+			throw new \Exception((string)$response->getBody());
+		}
 		if ($response->getStatusCode() == 404) {
 			throw new \Exception('PEPPOL identifier not found');
 		}

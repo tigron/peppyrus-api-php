@@ -163,6 +163,44 @@ class Message {
 	}
 
 	/**
+	 *
+	 * Render the content (UBL) in HTML or as a PDF
+	 *
+	 * @param string $id
+	 * @param string $type PDF|HTML
+	 * @return array
+	 */
+	public static function render($id, string $type = 'PDF'): array {
+		$client = new Client();
+		$response = $client->get('/v1/message/' . $id . '/render?' . $type);
+		$json = (string)$response->getBody();
+
+		if ($response->getStatusCode() == 404) {
+			throw new \Exception('Message not found');
+		}
+
+		return json_decode($json, true);
+	}
+
+	/**
+	 * Get the report for a specific message
+	 *
+	 * @param string $id
+	 * @return array
+	 */
+	public static function report($id): array {
+		$client = new Client();
+		$response = $client->get('/v1/message/' . $id . '/report');
+		$json = (string)$response->getBody();
+
+		if ($response->getStatusCode() == 404) {
+			throw new \Exception('Message not found');
+		}
+
+		return json_decode($json, true);
+	}
+
+	/**
 	 * Confirm
 	 * Confirm the good reception of the message
 	 *

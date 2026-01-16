@@ -170,9 +170,9 @@ class Message {
 	 * @param string $type PDF|HTML
 	 * @return array
 	 */
-	public static function render($id, string $type = 'PDF'): array {
+	public static function render($id, string $type = 'pdf'): array {
 		$client = new Client();
-		$response = $client->get('/v1/message/' . $id . '/render?' . $type);
+		$response = $client->get('/v1/message/' . $id . '/render?format=' . $type);
 		$json = (string)$response->getBody();
 
 		if ($response->getStatusCode() == 404) {

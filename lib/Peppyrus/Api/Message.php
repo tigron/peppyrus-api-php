@@ -223,4 +223,21 @@ class Message {
 		return json_decode($json, true);
 	}
 
+	/**
+	 * Delete
+	 * Delete a message, knowing its id
+	 * 
+	 * @param mixed $id
+	 */
+	public static function delete($id) {
+		$client = new Client();
+		$response = $client->delete('/v1/message/' . $id);
+		$json = (string)$response->getBody();
+			// null seems to be returned upon successful completion
+
+		if ($response->getStatusCode() == 404) {
+			throw new \Exception('Message not found');
+		}
+	}
+
 }
